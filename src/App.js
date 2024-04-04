@@ -1,6 +1,9 @@
-
 import {useState, useRef, useEffect } from 'react';
 import {createConnection} from './chat.js';
+import CatFriends from './friends.js';
+import From from './focus.js';
+import TodoList from './Todo.js';
+
 
 function VideoPlayer ({src, isPlaying}) {
   const ref = useRef(null);
@@ -15,7 +18,7 @@ function VideoPlayer ({src, isPlaying}) {
     }
   }, [isPlaying]);
 
-  return <video ref={ref} src={src} loop playInline />;
+  return <video ref={ref} src={src} loop playInline width="250" />;
 }
 
 function ChatRoom({roomId}) {
@@ -28,7 +31,7 @@ function ChatRoom({roomId}) {
     return () => {
       connection.disconnect();
     };
-  });
+  }, []);
   return (
     <>
     <label>
@@ -62,7 +65,8 @@ export default function App() {
     <VideoPlayer isPlaying={isPlaying} src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
 
     />
-
+    <br />
+    <br />
     <label>
       Choose the chat room:{''}
       <select
@@ -78,6 +82,12 @@ export default function App() {
     </label>
     {show && <hr />}
     {show && <ChatRoom roomId={roomId}/>}
+    <CatFriends/>
+    <From />
+    <br />
+    <br />
+    <TodoList />
     </>
   );
 }
+
