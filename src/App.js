@@ -3,6 +3,7 @@ import {createConnection} from './chat.js';
 import CatFriends from './friends.js';
 import From from './focus.js';
 import TodoList from './Todo.js';
+import Form from './message.js';
 
 
 function VideoPlayer ({src, isPlaying}) {
@@ -31,7 +32,7 @@ function ChatRoom({roomId}) {
     return () => {
       connection.disconnect();
     };
-  }, []);
+  }, [roomId, serverUrl]);
   return (
     <>
     <label>
@@ -84,6 +85,9 @@ export default function App() {
     {show && <ChatRoom roomId={roomId}/>}
     <CatFriends/>
     <From />
+    <br/>
+    <br/>
+    <Form />
     <br />
     <br />
     <TodoList />
