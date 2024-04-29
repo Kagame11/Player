@@ -11,6 +11,83 @@ import { useOnlineStatus} from './useOnlineStatus.js';
 import {useFormInput} from './useFormInput.js';
 import {useCounter} from './UseCounter.js';
 import {usePointerPosition} from './UsePointerPosition.js';
+import ProductPage from './ProductPage.js';
+import ModalDialog from './ModalDialog.js';
+import Map from './Map.js';
+import MyInput from './MyInput.js';
+
+function Form3(){
+  const ref = useRef(null);
+
+function handleClick() {
+  ref.current.focus();
+
+}
+
+return (
+  <form>
+    <MyInput placeholder="Enter your name" ref={ref} />
+    <button type="button" onClick={handleClick}>
+      Edit
+    </button>
+  </form>
+);
+}
+
+ function App5() {
+  const [zoomLevel, setZoomLevel] = useState(0);
+  return (
+    <>
+    Zoom level: {zoomLevel}x
+    <button onClick={() => setZoomLevel(zoomLevel + 1)}>+</button>
+    <button onClick={() => setZoomLevel(zoomLevel - 1)}>-</button>
+    <hr />
+    <Map zoomLevel={zoomLevel} />
+    </>
+  );
+
+}
+
+function App4() {
+  const [show, setShow] = useState(false);
+  return (
+    <>
+    <button onClick={() => setShow(true)}>
+      Open dialog
+    </button>
+    <ModalDialog isOpen={show}>
+      Hello there!
+      <br />
+      <button onClick={() => {
+        setShow(false);
+      }}>Close</button>
+    </ModalDialog>
+    </>
+  );
+}
+
+
+function App3() {
+  const [isBlue, setIsBlue] = useState(false);
+  return (
+    <>
+    <label>
+      <input
+      type="checkbox"
+      checked={isBlue}
+      onChange={e => setIsBlue(e.target.checked)}
+      />
+      Blue mode
+    </label>
+    <hr />
+    <ProductPage
+    reffererId="wizard_of_oz"
+    productId={123}
+    theme={isBlue ? 'blue' : 'light'}
+    />
+    </>
+  );
+}
 
 
 function Counter() {
@@ -294,7 +371,18 @@ export default function App() {
       <br />
       <useDelayedValue />
       <Canvas />
+      
       <Dot />
+      <App3 />
+      <br />
+      <br />
+      <App4 />
+      <br />
+      <br />
+      <App5 />
+      <br />
+      <br />
+      <Form3 />
     </>
     
   );
